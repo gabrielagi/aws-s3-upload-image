@@ -9,3 +9,5 @@ route.post("/upload", (req, res) => {
   console.log(req.files);
   res.send("File uploaded");
 });
+
+module.exports = route;
