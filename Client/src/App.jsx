@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 const App = () => {
   const [post, setPost] = useState({
@@ -14,8 +15,20 @@ const App = () => {
     setPost({ ...post, photo: event.target.files[0] });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    const formData = new FormData();
+    formData.append("photo", post.photo);
+    const response = await axios.post(
+      "http://localhost:3000/upload",
+      formData,
+      {
+        headers: {
+          "Content-type": "multipart/form-data",
+        },
+      }
+    );
+    console.log(response);
   };
 
   return (
